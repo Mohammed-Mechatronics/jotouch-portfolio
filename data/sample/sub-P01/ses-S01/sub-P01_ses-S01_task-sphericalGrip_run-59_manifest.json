@@ -1,0 +1,28 @@
+{
+  "sub": "P01",
+  "ses": "S01",
+  "task": "sphericalGrip",
+  "run": 59,
+  "physio_rows": 1899,
+  "camera_rows": 406,
+  "targets_rows": 1899,
+  "bad_physio_count": 0,
+  "bad_camera_count": 0,
+  "bad_targets_count": 0,
+  "started_at": "2026-06-30T08:15:08Z",
+  "finished_at": "2026-06-30T08:15:27Z",
+  "complete": true,
+  "aborted": false,
+  "physio_sha1": "c26c0422db6ef374a353b87ce150926ba15d42e1",
+  "camera_sha1": "7fb1c8d645e37dd21c34e95e2f2a1011fcb51225",
+  "targets_sha1": "7cd104eb32b2702fd43d418606a083d1a0d4680c",
+  "software_version": "1.0.0",
+  "bids_version": "1.9.0",
+  "camera_quality": {
+    "achieved_fps": 21.3,
+    "mean_led_cam": 113.4,
+    "led_visible_pct": 100.0,
+    "total_frames": 406,
+    "valid_pct": 100.0
+  }
+}

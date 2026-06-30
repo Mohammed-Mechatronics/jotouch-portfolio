@@ -1,0 +1,5 @@
+channel_name	sensor_id	type	units	placement_description	target_muscle
+fsr0	FSR-001	FSR	raw	ulnar_side	flexor_carpi_ulnaris
+fsr1	FSR-002	FSR	raw	ventral_mid	flexor_digitorum
+fsr2	FSR-003	FSR	raw	radial_mid	extensor_digitorum
+fsr3	FSR-004	FSR	raw	dorsal_side	extensor_carpi_radialis

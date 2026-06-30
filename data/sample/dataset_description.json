@@ -1,0 +1,14 @@
+{
+  "Name": "JoTouch FMG Hand Gesture Dataset",
+  "BIDSVersion": "1.9.0",
+  "DatasetType": "raw",
+  "Authors": [
+    "JoTouch Project"
+  ],
+  "License": "n/a",
+  "Acknowledgements": "",
+  "Funding": "",
+  "EthicsApprovals": [],
+  "ReferencesAndLinks": [],
+  "DatasetDOI": ""
+}

@@ -1,0 +1,28 @@
+{
+  "sub": "P01",
+  "ses": "S01",
+  "task": "tripodGrip",
+  "run": 51,
+  "physio_rows": 1899,
+  "camera_rows": 406,
+  "targets_rows": 1899,
+  "bad_physio_count": 0,
+  "bad_camera_count": 0,
+  "bad_targets_count": 0,
+  "started_at": "2026-06-30T08:12:36Z",
+  "finished_at": "2026-06-30T08:12:55Z",
+  "complete": true,
+  "aborted": false,
+  "physio_sha1": "26a0f2fa32aa19c4b8542eee9076ff8e48a112e8",
+  "camera_sha1": "5d8b006333478e0fe84635c8ef9b92d1a0a84259",
+  "targets_sha1": "e0c5f648c3d091154c00ab03c72e363edead6c57",
+  "software_version": "1.0.0",
+  "bids_version": "1.9.0",
+  "camera_quality": {
+    "achieved_fps": 21.4,
+    "mean_led_cam": 114.6,
+    "led_visible_pct": 100.0,
+    "total_frames": 406,
+    "valid_pct": 100.0
+  }
+}

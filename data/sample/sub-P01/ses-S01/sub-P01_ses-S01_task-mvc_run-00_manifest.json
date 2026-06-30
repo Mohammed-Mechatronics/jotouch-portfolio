@@ -1,0 +1,28 @@
+{
+  "sub": "P01",
+  "ses": "S01",
+  "task": "mvc",
+  "run": 0,
+  "physio_rows": 2097,
+  "camera_rows": 448,
+  "targets_rows": 2097,
+  "bad_physio_count": 0,
+  "bad_camera_count": 0,
+  "bad_targets_count": 0,
+  "started_at": "2026-06-30T07:56:33Z",
+  "finished_at": "2026-06-30T07:56:46Z",
+  "complete": true,
+  "aborted": false,
+  "physio_sha1": "d91a8e112fd7cf83e26aed75310350309d026c86",
+  "camera_sha1": "8c6e6b116c0c9fd0aa28a0aad68a3ba2351077a2",
+  "targets_sha1": "070364d29735dbd1866b92992d233d7621ead65c",
+  "software_version": "1.0.0",
+  "bids_version": "1.9.0",
+  "camera_quality": {
+    "achieved_fps": 34.5,
+    "mean_led_cam": 157.9,
+    "led_visible_pct": 100.0,
+    "total_frames": 448,
+    "valid_pct": 54.7
+  }
+}

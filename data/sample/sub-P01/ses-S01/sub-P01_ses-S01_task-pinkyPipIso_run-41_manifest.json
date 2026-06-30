@@ -1,0 +1,28 @@
+{
+  "sub": "P01",
+  "ses": "S01",
+  "task": "pinkyPipIso",
+  "run": 41,
+  "physio_rows": 1900,
+  "camera_rows": 406,
+  "targets_rows": 1900,
+  "bad_physio_count": 0,
+  "bad_camera_count": 0,
+  "bad_targets_count": 0,
+  "started_at": "2026-06-30T08:09:26Z",
+  "finished_at": "2026-06-30T08:09:45Z",
+  "complete": true,
+  "aborted": false,
+  "physio_sha1": "25b6096f045cb13f3a94cd3e647d344bf233d180",
+  "camera_sha1": "73fdccb654e82930c435fe298abe042d7625ca82",
+  "targets_sha1": "1dcf31954463715f99244a97c4600a9f1e667756",
+  "software_version": "1.0.0",
+  "bids_version": "1.9.0",
+  "camera_quality": {
+    "achieved_fps": 21.3,
+    "mean_led_cam": 116.3,
+    "led_visible_pct": 100.0,
+    "total_frames": 406,
+    "valid_pct": 100.0
+  }
+}

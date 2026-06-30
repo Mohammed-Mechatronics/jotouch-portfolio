@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JoTouch Collection</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JoTouch Collection</h1>
+            <div id="connection-status" class="badge disconnected">Disconnected</div>
+        </header>
+
+        <!-- Mock data banner (always-on when mock reader is active) -->
+        <div id="mock-banner" class="mock-banner">
+            <strong>MOCK DATA</strong> — <span id="mock-banner-text">Using simulated sensor data</span>
+        </div>
+
+        <!-- Step indicator -->
+        <nav class="steps">
+            <div id="step-setup" class="step active">1. Setup</div>
+            <div id="step-tests" class="step">2. Tests</div>
+            <div id="step-collect" class="step">3. Collect</div>
+            <div id="step-summary" class="step">4. Summary</div>
+        </nav>
+
+        <!-- Screen 1: Setup -->
+        <section id="screen-setup" class="screen active">
+            <div class="panel">
+                <h2>Session Configuration</h2>
+
+                <div class="setup-form">
+                    <div class="subject-mode-bar">
+                        <label class="radio-line">
+                            <input type="radio" name="subject-mode" value="new" checked> New Subject
+                        </label>
+                        <label class="radio-line">
+                            <input type="radio" name="subject-mode" value="existing"> Existing Subject
+                        </label>
+                    </div>
+
+                    <div id="new-subject-row" class="subject-row">
+                        <label>
+                            Next Subject (auto-generated)
+                            <div class="input-with-btn">
+                                <input id="sub" type="text" value="P01" readonly>
+                                <button id="suggest-subject-btn" type="button" class="small-btn">Refresh</button>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div id="existing-subject-row" class="subject-row" style="display:none;">
+                        <label>
+                            Select Subject
+                            <div class="input-with-btn">
+                                <select id="existing-subject-select">
+                                    <option value="">-- Select subject --</option>
+                                </select>
+                                <button id="refresh-subjects-btn" type="button" class="small-btn">Refresh</button>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <label>
+                            Next Session (auto-generated)
+                            <div class="input-with-btn">
+                                <input id="ses" type="text" value="S01" readonly>
+                                <button id="suggest-session-btn" type="button" class="small-btn">Refresh</button>
+                            </div>
+                        </label>
+                        <label>
+                            Sensors (FSR channels)
+                            <input id="n-sensors" type="number" value="4" min="1" max="8">
+                        </label>
+                    </div>
+
+                    <p class="hint">Subject and session IDs are generated automatically to avoid naming conflicts. Use the refresh buttons to pick the next available label.</p>
+
+                    <div class="form-row checkbox-row">
+                        <label class="checkbox">
+                            <input id="dry-run" type="checkbox">
+                            Dry run (no hardware — uses simulated data)
+                        </label>
+                        <label class="checkbox">
+                            <input id="skip-precollect" type="checkbox">
+                            Skip pre-collect tests
+                        </label>
+                    </div>
+                </div>
+
+                <label class="port-label">
+                    Serial Port <span class="required">*</span>
+                    <div class="input-with-btn">
+                        <select id="port">
+                            <option value="">-- Select port --</option>
+                        </select>
+                        <button id="scan-ports-btn" type="button" style="padding:6px 12px;">Scan Ports</button>
+                    </div>
+                </label>
+                <p class="hint" id="dry-run-hint">Dry run is off — select a serial port and connect a camera for live data.</p>
+            </div>
+
+            <div class="panel">
+                <h2>Protocol</h2>
+                <div class="form-grid">
+                    <label>
+                        Reps per task
+                        <input id="n-reps" type="number" value="3" min="1" max="10">
+                    </label>
+                    <label>
+                        Record duration (s)
+                        <input id="record-duration" type="number" value="10" min="1" max="120">
+                    </label>
+                    <label>
+                        Prep duration (s)
+                        <input id="prep-duration" type="number" value="6" min="1" max="30" step="0.5">
+                    </label>
+                    <label>
+                        Rest duration (s)
+                        <input id="rest-duration" type="number" value="3" min="1" max="30" step="0.5">
+                    </label>
+                    <label class="checkbox">
+                        <input id="include-freeform" type="checkbox" checked>
+                        Include freeform (60s each)
+                    </label>
+                </div>
+                <div style="margin-top:0.75rem;">
+                    <h3>LED Sync ROI</h3>
+                    <p class="hint" id="led-roi-status">No ROI saved. Click "Calibrate LED ROI" to select the LED region on camera.</p>
+                    <div class="actions">
+                        <button id="calibrate-led-roi-btn" type="button" class="secondary">Calibrate LED ROI</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-row">
+                <div class="panel">
+                    <h2>Camera</h2>
+                    <div class="form-grid">
+                        <label>
+                            Camera index
+                            <select id="camera-index">
+                                <option value="0">Camera 0</option>
+                            </select>
+                        </label>
+                        <button id="scan-cameras-btn" type="button">Scan Cameras</button>
+                    </div>
+                        <p class="hint" id="camera-status">Click "Scan Cameras" to detect available webcams.</p>
+                        <div class="camera-container">
+                            <img id="camera-feed" src="" alt="Camera feed">
+                            <div id="camera-overlay" class="camera-overlay">
+                                <span id="camera-overlay-fps" class="overlay-fps">-- fps</span>
+                                <span id="camera-overlay-led" class="overlay-led">LED: --</span>
+                                <span id="camera-overlay-hand" class="overlay-hand">Hand: --</span>
+                                <span id="camera-overlay-roi" class="overlay-roi">ROI: none</span>
+                            </div>
+                        </div>
+                    <div class="tracking-settings" id="tracking-settings">
+                        <h3>Hand Tracking Settings</h3>
+                        <div class="form-grid">
+                            <label>
+                                Resolution
+                                <select id="cam-resolution">
+                                    <option value="640x480">640 x 480 (fast)</option>
+                                    <option value="1280x720">1280 x 720 (balanced)</option>
+                                    <option value="1920x1080">1920 x 1080 (detailed)</option>
+                                </select>
+                            </label>
+                            <label>
+                                Auto exposure
+                                <select id="cam-auto-exposure">
+                                    <option value="true">Auto</option>
+                                    <option value="false">Manual</option>
+                                </select>
+                            </label>
+                            <label>
+                                Detection confidence
+                                <input id="cam-detection-conf" type="range" min="0.1" max="0.9" step="0.05" value="0.5">
+                                <span id="cam-detection-conf-val" class="range-val">0.50</span>
+                            </label>
+                            <label>
+                                Presence confidence
+                                <input id="cam-presence-conf" type="range" min="0.1" max="0.9" step="0.05" value="0.5">
+                                <span id="cam-presence-conf-val" class="range-val">0.50</span>
+                            </label>
+                            <label>
+                                Tracking confidence
+                                <input id="cam-tracking-conf" type="range" min="0.1" max="0.9" step="0.05" value="0.5">
+                                <span id="cam-tracking-conf-val" class="range-val">0.50</span>
+                            </label>
+                            <button id="apply-tracking-btn" type="button" class="secondary">Apply Settings</button>
+                        </div>
+                        <p class="hint" id="tracking-hint">Higher confidence = more accurate but may lose tracking on fast movements. Resolution changes restart the camera.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h2 id="setup-fsr-label">FSR Preview</h2>
+                    <div id="setup-fsr-bars" class="fsr-vertical-bars"></div>
+                    <p class="hint" id="fsr-status">Select a serial port above and uncheck Dry run for live data.</p>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="start-btn" class="primary">Start Session</button>
+            </div>
+        </section>
+
+        <!-- Screen 2: Tests -->
+        <section id="screen-tests" class="screen">
+            <div class="collect-grid">
+                <!-- Test instruction card -->
+                <div class="panel test-instruction-panel" id="test-instruction-panel">
+                    <div class="test-instruction-header">
+                        <span class="test-progress-label" id="test-progress-label">Test &mdash;</span>
+                    </div>
+                    <h2 id="test-instruction-label">Preparing&hellip;</h2>
+                    <p class="test-instruction-text" id="test-instruction-text"></p>
+                    <p class="hint" id="test-duration-hint"></p>
+                    <div class="test-countdown-display" id="test-countdown-display"></div>
+                    <div class="test-fsr-bars" id="test-fsr-bars"></div>
+                    <div class="actions" id="test-actions">
+                        <button id="test-ready-btn" class="primary">Ready</button>
+                        <button id="override-btn" class="warning">Override &amp; Continue</button>
+                        <button id="back-to-setup-btn" class="secondary">Back to Setup</button>
+                    </div>
+                </div>
+
+                <!-- Camera feed for tests screen -->
+                <div class="panel">
+                    <h2>Camera</h2>
+                    <div class="camera-container">
+                        <img id="test-camera" src="" alt="Camera feed">
+                        <div id="test-camera-overlay" class="camera-overlay">
+                            <span class="overlay-fps">-- fps</span>
+                            <span class="overlay-led">LED: --</span>
+                            <span class="overlay-hand">Hand: --</span>
+                        </div>
+                    </div>
+                    <p class="hint" id="test-camera-status">Camera feed for visual verification.</p>
+                </div>
+            </div>
+
+            <!-- Test results list -->
+            <div class="panel">
+                <h2>Test Results</h2>
+                <div id="test-list"></div>
+            </div>
+        </section>
+
+        <!-- Screen 3: Collect -->
+        <section id="screen-collect" class="screen">
+            <!-- Begin Collection gate -->
+            <div class="panel" id="begin-gate-panel">
+                <h2>Ready to Collect</h2>
+                <div id="begin-gate-summary"></div>
+                <p class="hint">Position the subject and camera, then press Begin Collection when ready.</p>
+                <div class="actions">
+                    <button id="begin-collection-btn" class="primary">Begin Collection</button>
+                    <button id="retry-btn" class="warning" style="display:none;">Retry Failed Tests</button>
+                </div>
+            </div>
+
+            <!-- Active collection UI (hidden until Begin is pressed) -->
+            <div id="collect-active" style="display:none;">
+                <div class="collect-grid">
+                    <div class="panel collect-left">
+                        <h2>Camera</h2>
+                        <div class="camera-container">
+                            <img id="collect-camera" src="" alt="Camera feed">
+                            <div id="collect-camera-overlay" class="camera-overlay">
+                                <span class="overlay-fps">-- fps</span>
+                                <span class="overlay-led">LED: --</span>
+                                <span class="overlay-hand">Hand: --</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel collect-right">
+                        <h2>FSR Signals</h2>
+                        <div id="fsr-bars"></div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="cue-row">
+                        <div class="cue-card" id="cue-card">
+                            <div class="cue-phase" id="cue-phase">READY</div>
+                            <div class="cue-task" id="cue-task">Waiting to start...</div>
+                            <div class="cue-desc" id="cue-desc"></div>
+                            <div class="cue-instruction" id="cue-instruction"></div>
+                            <div class="cue-countdown" id="cue-countdown">--</div>
+                        </div>
+                        <div class="status-col">
+                            <div id="quality" class="quality green">Ready</div>
+                            <div class="progress-wrap">
+                                <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+                                <div id="progress-text" class="progress-text">0 / 0</div>
+                            </div>
+                            <div class="actions">
+                                <button id="stop-btn" class="danger" disabled>Stop Session</button>
+                                <button id="collect-back-to-setup-btn" class="secondary">Back to Setup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h2>Run Log</h2>
+                    <div id="run-list" class="run-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 4: Summary -->
+        <section id="screen-summary" class="screen">
+            <div class="panel">
+                <h2>Session Summary</h2>
+                <div id="summary-content"></div>
+            </div>
+            <div class="panel">
+                <h2>Quality Report</h2>
+                <div id="quality-report"></div>
+            </div>
+            <div class="panel">
+                <h2>Full Log</h2>
+                <pre id="log"></pre>
+            </div>
+            <div class="actions">
+                <button id="restart-btn" class="primary">New Session</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

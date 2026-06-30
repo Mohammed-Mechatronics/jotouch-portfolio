@@ -1,0 +1,28 @@
+{
+  "sub": "P01",
+  "ses": "S01",
+  "task": "middlePipIso",
+  "run": 23,
+  "physio_rows": 1899,
+  "camera_rows": 406,
+  "targets_rows": 1899,
+  "bad_physio_count": 0,
+  "bad_camera_count": 0,
+  "bad_targets_count": 0,
+  "started_at": "2026-06-30T08:03:44Z",
+  "finished_at": "2026-06-30T08:04:03Z",
+  "complete": true,
+  "aborted": false,
+  "physio_sha1": "9d774b9997484d136c2dbd875ab7f78cd90e4a92",
+  "camera_sha1": "7787fd3f2dc04f46161cf81b8cb889a7f8d8e334",
+  "targets_sha1": "211ea4ad873fd66bdde0d5b00472f58701fa727d",
+  "software_version": "1.0.0",
+  "bids_version": "1.9.0",
+  "camera_quality": {
+    "achieved_fps": 21.3,
+    "mean_led_cam": 116.1,
+    "led_visible_pct": 100.0,
+    "total_frames": 406,
+    "valid_pct": 100.0
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "a": 0.9999991339709635,
+  "b": -307201571.4300244,
+  "skew_ms": 307.20157143002433,
+  "n_matched_pairs": 45,
+  "reason": "LED sync computed successfully",
+  "calibration_time": "2026-06-30T09:52:20.395064+00:00",
+  "method": "hybrid_prbs_nad",
+  "prbs_offset_ms": 328.11,
+  "prbs_score": 46414.014,
+  "nad_offset_ms": 307.2,
+  "nad_drift_ppm": -0.87,
+  "n_windows": 45,
+  "cross_validation_passed": true,
+  "nad_method": "directed_windowed_nad",
+  "cross_validation_diff_ms": 20.91,
+  "std_ms": null,
+  "abs_correlation": null
+}

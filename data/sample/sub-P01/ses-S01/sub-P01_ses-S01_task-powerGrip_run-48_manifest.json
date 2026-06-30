@@ -1,0 +1,28 @@
+{
+  "sub": "P01",
+  "ses": "S01",
+  "task": "powerGrip",
+  "run": 48,
+  "physio_rows": 1894,
+  "camera_rows": 405,
+  "targets_rows": 1894,
+  "bad_physio_count": 0,
+  "bad_camera_count": 0,
+  "bad_targets_count": 0,
+  "started_at": "2026-06-30T08:11:39Z",
+  "finished_at": "2026-06-30T08:11:58Z",
+  "complete": true,
+  "aborted": false,
+  "physio_sha1": "0aa0e4eed61770160e824ee8b15483a15e3e313d",
+  "camera_sha1": "4521ee876e6e3f6b87464d40db971fc75a97c28a",
+  "targets_sha1": "74bdc6f9a890fb5bd8312d8a9f536135e2212723",
+  "software_version": "1.0.0",
+  "bids_version": "1.9.0",
+  "camera_quality": {
+    "achieved_fps": 21.4,
+    "mean_led_cam": 112.7,
+    "led_visible_pct": 100.0,
+    "total_frames": 405,
+    "valid_pct": 100.0
+  }
+}

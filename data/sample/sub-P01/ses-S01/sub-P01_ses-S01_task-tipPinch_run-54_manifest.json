@@ -1,0 +1,28 @@
+{
+  "sub": "P01",
+  "ses": "S01",
+  "task": "tipPinch",
+  "run": 54,
+  "physio_rows": 1899,
+  "camera_rows": 406,
+  "targets_rows": 1899,
+  "bad_physio_count": 0,
+  "bad_camera_count": 0,
+  "bad_targets_count": 0,
+  "started_at": "2026-06-30T08:13:33Z",
+  "finished_at": "2026-06-30T08:13:52Z",
+  "complete": true,
+  "aborted": false,
+  "physio_sha1": "71461c546a23dde9d36ff96e29cea27c15805eb0",
+  "camera_sha1": "9c7cf96cfb10bc61978cbcf1aeb9325ba2e593a9",
+  "targets_sha1": "143c8a91352d06a3b774e9905cbba4fc1dea4fea",
+  "software_version": "1.0.0",
+  "bids_version": "1.9.0",
+  "camera_quality": {
+    "achieved_fps": 21.4,
+    "mean_led_cam": 115.1,
+    "led_visible_pct": 100.0,
+    "total_frames": 406,
+    "valid_pct": 100.0
+  }
+}

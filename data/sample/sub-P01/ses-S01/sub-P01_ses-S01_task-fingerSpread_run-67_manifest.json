@@ -1,0 +1,28 @@
+{
+  "sub": "P01",
+  "ses": "S01",
+  "task": "fingerSpread",
+  "run": 67,
+  "physio_rows": 1899,
+  "camera_rows": 406,
+  "targets_rows": 1899,
+  "bad_physio_count": 0,
+  "bad_camera_count": 0,
+  "bad_targets_count": 0,
+  "started_at": "2026-06-30T08:17:40Z",
+  "finished_at": "2026-06-30T08:17:59Z",
+  "complete": true,
+  "aborted": false,
+  "physio_sha1": "f8c3387c00ba16c948715405e01b8560f6b89a51",
+  "camera_sha1": "af82ddd1ca64d829d71436c85f75fd970affb526",
+  "targets_sha1": "9588551432fea24ffb7a4c34345a22f6bee0f950",
+  "software_version": "1.0.0",
+  "bids_version": "1.9.0",
+  "camera_quality": {
+    "achieved_fps": 21.4,
+    "mean_led_cam": 112.7,
+    "led_visible_pct": 100.0,
+    "total_frames": 406,
+    "valid_pct": 100.0
+  }
+}

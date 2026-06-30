@@ -1,0 +1,28 @@
+{
+  "sub": "P01",
+  "ses": "S01",
+  "task": "extensionGrip",
+  "run": 63,
+  "physio_rows": 1899,
+  "camera_rows": 406,
+  "targets_rows": 1899,
+  "bad_physio_count": 0,
+  "bad_camera_count": 0,
+  "bad_targets_count": 0,
+  "started_at": "2026-06-30T08:16:24Z",
+  "finished_at": "2026-06-30T08:16:43Z",
+  "complete": true,
+  "aborted": false,
+  "physio_sha1": "7186646d3a3957c3140cbf6a96d1e884615e0c31",
+  "camera_sha1": "b6c3735dc63313d85a12f0899c942051a48774aa",
+  "targets_sha1": "337f8f9e2ac7b32b718501943037cecc7e2d077a",
+  "software_version": "1.0.0",
+  "bids_version": "1.9.0",
+  "camera_quality": {
+    "achieved_fps": 21.3,
+    "mean_led_cam": 113.1,
+    "led_visible_pct": 100.0,
+    "total_frames": 406,
+    "valid_pct": 100.0
+  }
+}

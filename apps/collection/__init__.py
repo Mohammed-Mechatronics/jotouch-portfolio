@@ -1,0 +1,1 @@
+"""JoTouch BIDS collection application."""

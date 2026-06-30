@@ -1,0 +1,28 @@
+{
+  "sub": "P01",
+  "ses": "S01",
+  "task": "ringDipIso",
+  "run": 35,
+  "physio_rows": 1899,
+  "camera_rows": 406,
+  "targets_rows": 1899,
+  "bad_physio_count": 0,
+  "bad_camera_count": 0,
+  "bad_targets_count": 0,
+  "started_at": "2026-06-30T08:07:32Z",
+  "finished_at": "2026-06-30T08:07:51Z",
+  "complete": true,
+  "aborted": false,
+  "physio_sha1": "dff763a9541bdc31c344d1274770d50ca859db20",
+  "camera_sha1": "794276be5a36f2d2ef49c8b396ae0618d0f3901e",
+  "targets_sha1": "3a8374971e4edffeacd4eeabb4fcbceba46d476f",
+  "software_version": "1.0.0",
+  "bids_version": "1.9.0",
+  "camera_quality": {
+    "achieved_fps": 21.3,
+    "mean_led_cam": 116.6,
+    "led_visible_pct": 100.0,
+    "total_frames": 406,
+    "valid_pct": 100.0
+  }
+}

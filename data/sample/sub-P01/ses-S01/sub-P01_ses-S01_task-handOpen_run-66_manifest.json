@@ -1,0 +1,28 @@
+{
+  "sub": "P01",
+  "ses": "S01",
+  "task": "handOpen",
+  "run": 66,
+  "physio_rows": 1899,
+  "camera_rows": 406,
+  "targets_rows": 1899,
+  "bad_physio_count": 0,
+  "bad_camera_count": 0,
+  "bad_targets_count": 0,
+  "started_at": "2026-06-30T08:17:21Z",
+  "finished_at": "2026-06-30T08:17:40Z",
+  "complete": true,
+  "aborted": false,
+  "physio_sha1": "e8f8a584a69bfdf4c19841a3a36815f56d4d0391",
+  "camera_sha1": "0c208748f62f28b93f58b9f596b2886c155fdc1c",
+  "targets_sha1": "5357506b9e3f23297945260a15c7485518671f32",
+  "software_version": "1.0.0",
+  "bids_version": "1.9.0",
+  "camera_quality": {
+    "achieved_fps": 21.4,
+    "mean_led_cam": 113.4,
+    "led_visible_pct": 100.0,
+    "total_frames": 406,
+    "valid_pct": 100.0
+  }
+}

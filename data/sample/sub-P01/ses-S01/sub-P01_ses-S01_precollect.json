@@ -1,0 +1,129 @@
+{
+  "test_time": "2026-06-30T07:56:25Z",
+  "sensor_specific": {
+    "dead_stuck_channels": {
+      "passed": true,
+      "dead_channels": []
+    },
+    "channel_activation": {
+      "passed": true,
+      "all_channels_active": true,
+      "max_values": {
+        "fsr0": 786,
+        "fsr1": 601,
+        "fsr2": 612,
+        "fsr3": 655
+      }
+    },
+    "baseline_stability": {
+      "passed": false,
+      "rest_duration_s": 5.0,
+      "max_std": 28.7,
+      "per_channel_std": {
+        "fsr0": 22.3,
+        "fsr1": 26.8,
+        "fsr2": 14.7,
+        "fsr3": 28.7
+      }
+    },
+    "response_linearity": {
+      "passed": true,
+      "best_r2": 0.812,
+      "max_dynamic_range": 703.0,
+      "any_saturated": false,
+      "quality_ok": true,
+      "warning": false,
+      "per_channel": {
+        "fsr0": {
+          "r2": 0.709,
+          "increasing": true,
+          "saturated": false,
+          "dynamic_range": 648.0
+        },
+        "fsr1": {
+          "r2": 0.79,
+          "increasing": true,
+          "saturated": false,
+          "dynamic_range": 503.0
+        },
+        "fsr2": {
+          "r2": 0.738,
+          "increasing": true,
+          "saturated": false,
+          "dynamic_range": 703.0
+        },
+        "fsr3": {
+          "r2": 0.812,
+          "increasing": true,
+          "saturated": false,
+          "dynamic_range": 549.0
+        }
+      }
+    },
+    "creep_drift": {
+      "passed": true,
+      "warmup_s": 3.0,
+      "drift_pct": 2.93,
+      "per_channel": {
+        "fsr0": 0.3,
+        "fsr1": 2.93,
+        "fsr2": 1.51,
+        "fsr3": 0.53
+      }
+    }
+  },
+  "hardware": {
+    "camera_tracking": {
+      "passed": true,
+      "mean_confidence": 0.986,
+      "handedness": "Right",
+      "n_valid_frames": 90
+    },
+    "sync_check": {
+      "passed": true,
+      "method": "serial_LED_column + camera_LED_edge_detection",
+      "n_samples": 1000,
+      "expected_samples": 1000,
+      "led_transitions": 10,
+      "serial_led_used": true,
+      "led_toggling": true,
+      "stuck_channel": false,
+      "ranges": {
+        "fsr0": 57.0,
+        "fsr1": 59.0,
+        "fsr2": 34.0,
+        "fsr3": 57.0
+      },
+      "led_roi_used": true,
+      "transition_threshold": 15.0,
+      "camera_rising_edges": 9,
+      "camera_brightness_range": 79.8,
+      "camera_on_mean": 187.4,
+      "camera_off_mean": 114.6,
+      "camera_contrast": 0.636,
+      "camera_brightness_samples": 1000,
+      "needs_calibration": false,
+      "camera_failed": false,
+      "issues": []
+    }
+  },
+  "regression_specific": {
+    "single_dof_isolation": {
+      "passed": false,
+      "dofs_tested": [
+        "index_mcp"
+      ],
+      "primary_channel": 0,
+      "primary_range": 311.0,
+      "isolation_ratio": 1.6,
+      "mean_cross_corr": 0.78,
+      "direction_changes": 245,
+      "ranges": {
+        "fsr0": 311.0,
+        "fsr1": 235.0,
+        "fsr2": 79.0,
+        "fsr3": 269.0
+      }
+    }
+  }
+}

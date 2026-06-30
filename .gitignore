@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local-only directories
+_archive/
+models/
+
+# Logs
+*.log
+
+# LED calibration output (machine-local)
+led_roi.json
+
+# BIDS data — raw, processed, and results are gitignored
+# Only data/sample/ is tracked (curated demo subset)
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/dataset_description.json
+!data/raw/participants.tsv
+!data/raw/sessions.tsv
+data/processed/*
+!data/processed/.gitkeep
+data/results/*
+!data/results/.gitkeep
