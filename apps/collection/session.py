@@ -910,7 +910,7 @@ def run_session(
     # Run offline LED sync and write led_sync.json
     try:
         from apps.collection.led_sync import write_led_sync
-        write_led_sync(sub, ses, data_root=root)
+        write_led_sync(sub, ses, data_root=root, method="fft_xcorr")
     except Exception as exc:
         logger.warning("LED sync failed: %s", exc)
 

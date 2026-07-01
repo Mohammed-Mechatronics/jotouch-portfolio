@@ -82,13 +82,36 @@ python -m pytest apps/collection/tests/test_sync_precision_proof.py -v
 
 ---
 
+## FFT cross-correlation sync (default method)
+
+The current default sync algorithm is a fully-optimized FFT cross-correlation
+(`apps/collection/fft_xcorr.py`) with three refinement stages:
+
+1. **Coarse** — zero-padded FFT cross-correlation on a 0.1 ms grid.
+2. **Sub-sample** — Gaussian interpolation of the correlation peak.
+3. **Spline refinement** — cubic spline around the peak for final precision.
+
+It operates directly on the LED brightness signal recorded by the camera and
+the LED state column from the FSR stream, requiring no PRBS preamble.
+
+Run offline sync on a recorded session:
+```bash
+python -c "from apps.collection.led_sync import fft_xcorr_sync; print(fft_xcorr_sync('P01','S01'))"
+```
+
+The legacy PRBS + NAd pipeline remains available via `apps/collection/prbs.py`
+and `led_sync.run_led_sync()`.
+
+---
+
 ## Folder map
 
 | Folder | What it contains |
 |--------|------------------|
-| `apps/collection/` | Collection app: serial reader, camera, BIDS writer, PRBS sync, timer, pre-collect tests, web UI |
-| `core/` | Shared BIDS infrastructure: naming, schema, paths, loader, joint-angle derivation |
+| `apps/collection/` | Collection app: serial reader, camera, BIDS writer, PRBS sync, FFT xcorr sync, timer, pre-collect tests, web UI |
+| `core/` | Shared BIDS infrastructure: naming, schema, paths, loader, merge, splits, joint-angle derivation |
 | `data/sample/` | Curated BIDS sample (git-tracked) — one session, 76 runs |
+| `data/splits/` | Cross-task / cross-subject / cross-session / cross-trial split specs (YAML) |
 
 ---
 
@@ -111,6 +134,31 @@ Each run produces 3 CSVs sharing the same monotonic timestamp column:
 - **targets** — 15 joint angles (100 Hz)
 
 Filenames follow: `sub-{x}_ses-{x}_task-{x}_run-{NN}_{suffix}.csv`
+
+### Unified session record & ML data extraction
+
+The 76 per-run CSVs can be merged into a single `sub-P01_ses-S01_record.csv`
+(one row per 100 Hz tick, all sensors + camera + targets in one file) via:
+
+```bash
+python promote_to_sample.py          # merge per-run CSVs → unified record
+```
+
+From the unified record, extract ML-ready Parquet (raw samples, label column,
+reaction-time trim, dual classification + regression targets):
+
+```bash
+python extract_ml_data.py            # → data/derived/sub-P01/ses-S01/*.parquet
+```
+
+Then apply cross-task / cross-subject / cross-session / cross-trial split specs:
+
+```bash
+python apply_splits.py               # → data/splits/results/*.json
+```
+
+> The unified record CSV (~387 MB) and derived Parquet are gitignored —
+> regenerate them with the commands above.
 
 ---
 
