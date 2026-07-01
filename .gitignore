@@ -37,3 +37,19 @@ data/processed/*
 !data/processed/.gitkeep
 data/results/*
 !data/results/.gitkeep
+
+# Large unified session record (387 MB) — regenerate via promote_to_sample.py
+data/sample/sub-P01/ses-S01/sub-P01_ses-S01_record.csv
+data/sample/sub-P01/ses-S01/sub-P01_ses-S01_record.json
+
+# Derived ML data (regenerate via extract_ml_data.py)
+data/derived/
+
+# Split results (regenerate via apply_splits.py — only specs are tracked)
+data/splits/results/
+
+# Validation runs (regenerate via the validation framework)
+validation_results/
+
+# CV review scratch folder (not project work)
+_cv_review/

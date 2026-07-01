@@ -1,0 +1,21 @@
+name: cross_session
+description: "Leave-one-session-out within subject. Tests generalization to a different day (sensor re-placement, skin changes). Requires >= 2 sessions per subject."
+generalization_level: cross_session
+
+# Group by (sub, ses) → each group is one session of one subject
+unit:
+  group_by: [sub, ses]
+
+# Leave-one-out: rotate the ses column
+strategy:
+  type: leave_one_out
+  leave_one_out_column: ses
+
+filters:
+  exclude_tasks: [mvc, freeform]
+  exclude_phases: [PREP]
+  include_rest_as_class: true
+
+stratify_by: task
+
+splits: [train, test]

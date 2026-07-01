@@ -1,0 +1,22 @@
+name: cross_task
+description: "Leave-one-task-out. Tests if the model can learn a new gesture unseen in training."
+generalization_level: cross_task
+
+# Group by (task) → each group is one task across all subjects/sessions/reps
+unit:
+  group_by: [task]
+
+# Leave-one-out: rotate the task column
+strategy:
+  type: leave_one_out
+  leave_one_out_column: task
+
+filters:
+  exclude_tasks: [mvc, freeform]
+  exclude_phases: [PREP]
+  include_rest_as_class: true
+
+# No stratification possible (each fold has a different task in test)
+stratify_by: ""
+
+splits: [train, test]

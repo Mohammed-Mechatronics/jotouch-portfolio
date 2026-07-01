@@ -1,0 +1,21 @@
+name: cross_subject
+description: "Leave-one-subject-out (LOSO). Tests generalization to a completely new user. Requires >= 10 subjects for robust results."
+generalization_level: cross_subject
+
+# Group by (sub) → each group is one subject
+unit:
+  group_by: [sub]
+
+# Leave-one-out: rotate the sub column
+strategy:
+  type: leave_one_out
+  leave_one_out_column: sub
+
+filters:
+  exclude_tasks: [mvc, freeform]
+  exclude_phases: [PREP]
+  include_rest_as_class: true
+
+stratify_by: task
+
+splits: [train, test]

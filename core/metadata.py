@@ -102,6 +102,11 @@ class LedSyncMetadata:
     nad_drift_ppm: float | None = None
     n_windows: int | None = None
     cross_validation_passed: bool | None = None
+    # FFT xcorr fields (additive, backward-compatible)
+    offset_s: float | None = None
+    offset_ms: float | None = None
+    score: float | None = None
+    drift_ppm: float | None = None
 
 
 @dataclass

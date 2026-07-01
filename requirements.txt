@@ -29,6 +29,13 @@ pytest-timeout>=2.0
 httpx>=0.27.0
 jupyter>=1.0
 
-# LED synchronization (hybrid PRBS + NAd)
-nearest-advocate>=0.2.0
+# ML data pipeline (Parquet + split specs)
+pyarrow>=14.0
+pyyaml>=6.0
+
+# LED synchronization (FFT xcorr — default method)
 numba>=0.59
+
+# LED synchronization (legacy hybrid PRBS + NAd — optional)
+# Uncomment if you need to run the legacy sync algorithm:
+# nearest-advocate>=0.2.0

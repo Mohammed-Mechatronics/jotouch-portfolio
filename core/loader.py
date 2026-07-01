@@ -278,6 +278,85 @@ def load_all_sessions(
     return sessions
 
 
+# ── Single-file format loaders (new merged CSV format) ───────────────────────
+
+
+def load_session_record(
+    sub: str,
+    ses: str,
+    *,
+    data_root: Path | None = None,
+) -> pd.DataFrame:
+    """Load the single merged record CSV for a session.
+
+    This is the new format produced by ``promote_to_sample.py``: one CSV
+    with all runs merged at 100Hz, camera forward-filled, targets joined.
+
+    Returns an empty DataFrame if the file doesn't exist.
+    """
+    sdir = paths.session_dir(sub, ses, data_root=data_root)
+    record_path = sdir / f"sub-{sub}_ses-{ses}_record.csv"
+    if not record_path.exists():
+        return pd.DataFrame()
+    return pd.read_csv(record_path)
+
+
+def load_run_from_record(
+    record_df: pd.DataFrame,
+    task: str,
+    run: int,
+) -> pd.DataFrame:
+    """Extract a single run from a merged session record DataFrame.
+
+    Parameters
+    ----------
+    record_df : pd.DataFrame
+        The merged session record (from ``load_session_record``).
+    task : str
+        Task name (e.g. "thumbCmcIso").
+    run : int
+        Run number.
+
+    Returns
+    -------
+    pd.DataFrame
+        Rows for the specified run only.
+    """
+    if record_df.empty:
+        return record_df
+    mask = (record_df["task"] == task) & (record_df["run"] == run)
+    return record_df[mask].reset_index(drop=True)
+
+
+def load_all_session_records(
+    data_root: Path | None = None,
+) -> dict[tuple[str, str], pd.DataFrame]:
+    """Load all session record CSVs from a data root.
+
+    Returns a dict mapping (sub, ses) → merged DataFrame.
+    Only sessions with a _record.csv file are included.
+    """
+    root = data_root or paths.SAMPLE_DIR
+    records: dict[tuple[str, str], pd.DataFrame] = {}
+
+    if not root.exists():
+        return records
+
+    for subj_dir in sorted(root.iterdir()):
+        if not (subj_dir.is_dir() and subj_dir.name.startswith("sub-")):
+            continue
+        sub = subj_dir.name[4:]
+        for ses_dir in sorted(subj_dir.iterdir()):
+            if not (ses_dir.is_dir() and ses_dir.name.startswith("ses-")):
+                continue
+            ses = ses_dir.name[4:]
+            record = load_session_record(sub, ses, data_root=root)
+            if not record.empty:
+                records[(sub, ses)] = record
+
+    return records
+
+
 def load_regression_data(
     data_root: Path | None = None,
 ) -> tuple[np.ndarray, np.ndarray, pd.DataFrame]:

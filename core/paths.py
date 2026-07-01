@@ -18,7 +18,9 @@ DATA_ROOT = REPO_ROOT / "data"
 # Subdirectories
 SAMPLE_DIR = DATA_ROOT / "sample"   # tracked in git — curated demo subset
 RAW_DIR = DATA_ROOT / "raw"         # gitignored — full collection writes here
-PROCESSED_DIR = DATA_ROOT / "processed"  # gitignored — features, splits, lockbox
+DERIVED_DIR = DATA_ROOT / "derived"  # gitignored — ML-ready Parquet files
+SPLITS_DIR = DATA_ROOT / "splits"    # tracked in git — split spec YAML files
+PROCESSED_DIR = DATA_ROOT / "processed"  # gitignored — legacy (deprecated)
 RESULTS_DIR = DATA_ROOT / "results"      # gitignored — validation reports
 
 # Legacy archive
@@ -36,8 +38,18 @@ def raw_dir() -> Path:
 
 
 def processed_dir() -> Path:
-    """Return the processed data directory (features, splits, lockbox)."""
+    """Return the processed data directory (legacy, deprecated — use derived_dir)."""
     return PROCESSED_DIR
+
+
+def derived_dir() -> Path:
+    """Return the derived data directory (ML-ready Parquet files)."""
+    return DERIVED_DIR
+
+
+def splits_dir() -> Path:
+    """Return the splits directory (split spec YAML files, git-tracked)."""
+    return SPLITS_DIR
 
 
 def results_dir() -> Path:

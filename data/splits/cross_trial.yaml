@@ -1,0 +1,26 @@
+name: cross_trial
+description: "Leave-one-rep-out within subject/session. Tests generalization to later repetitions (fatigue, drift)."
+generalization_level: cross_trial
+
+# The unit is the granularity at which we split.
+# All samples within a unit go to the same split (no leakage).
+# For cross_trial: group by (sub, ses, task, rep) → each group is one rep of one task
+unit:
+  group_by: [sub, ses, task, rep]
+
+# Leave-one-out: rotate the rep column
+strategy:
+  type: leave_one_out
+  leave_one_out_column: rep
+
+# Filters: exclude non-gesture tasks, exclude PREP phase
+filters:
+  exclude_tasks: [mvc, freeform]
+  exclude_phases: [PREP]
+  include_rest_as_class: true
+
+# Stratify by task so each task appears in each fold
+stratify_by: task
+
+# With 3 reps, this produces 3 folds (no val set — use CV instead)
+splits: [train, test]
